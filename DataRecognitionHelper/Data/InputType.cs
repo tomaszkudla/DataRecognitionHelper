@@ -4,8 +4,9 @@ using System.Text;
 
 namespace DataRecognitionHelper.Data
 {
-    public enum DataType
+    public enum InputType
     {
+        Auto,
         Bin,
         Dec,
         Hex,
