@@ -27,7 +27,7 @@ namespace DataRecognitionHelperUnitTests
         [TestMethod]
         public void GuessDecimalInput()
         {
-            var input = "1234567890";
+            var input = "1 234 567 890";
             var actualResult = manager.GuessInputType(input);
             Assert.AreEqual(InputType.Dec, actualResult);
         }
@@ -58,36 +58,36 @@ namespace DataRecognitionHelperUnitTests
             var actualResult = manager.ConvertToByteArray(input);
             var expectedResult = new byte[]
             {
+                (byte)53,
                 (byte)170,
-                (byte)26
             };
-            Assert.AreEqual(expectedResult, actualResult);
+            CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         [TestMethod]
         public void ConvertDecimal()
         {
-            var input = "‭61491‬";
+            var input = "61491";
             var actualResult = manager.ConvertToByteArray(input);
             var expectedResult = new byte[]
             {
+                (byte)51,
                 (byte)240,
-                (byte)51
             };
-            Assert.AreEqual(expectedResult, actualResult);
+            CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         [TestMethod]
         public void ConvertHexadecimal()
         {
-            var input = "‭ABCD‬";
+            var input = "ABCD";
             var actualResult = manager.ConvertToByteArray(input);
             var expectedResult = new byte[]
             {
+                (byte)205,
                 (byte)171,
-                (byte)205
             };
-            Assert.AreEqual(expectedResult, actualResult);
+            CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         #endregion
@@ -97,13 +97,13 @@ namespace DataRecognitionHelperUnitTests
         [TestMethod]
         public void GetOutputsForBinary()
         {
-            var input = "‭1111 0010 1010 1011‬ 1010 1110 0100 0011";
+            var input = "1111 0010 1010 1011 1010 1110 0100 0011";
             var outputs = manager.GetOutputs(input);
 
-            Assert.AreEqual("11110010101010111010111001000011"‬, outputs.Binary);
-            Assert.AreEqual("242 171 174 67"‬, outputs.Byte);
-            Assert.AreEqual("62123 44611‬"‬, outputs.Integer16);
-            Assert.AreEqual("4071337539‬"‬, outputs.Integer32);
+            Assert.AreEqual("11110010101010111010111001000011", outputs.Binary);
+            CollectionAssert.AreEqual(new byte[] { 67, 174, 171, 242 }, outputs.Byte);
+            CollectionAssert.AreEqual(new UInt16[] { 44611, 62123 }, outputs.Integer16);
+            CollectionAssert.AreEqual(new UInt32[] { 4071337539 }, outputs.Integer32);
         }
 
         [TestMethod]
@@ -112,10 +112,10 @@ namespace DataRecognitionHelperUnitTests
             var input = "997 997";
             var outputs = manager.GetOutputs(input);
 
-            Assert.AreEqual("11110011101001101101‬‬"‬, outputs.Binary);
-            Assert.AreEqual("15 58 109"‬, outputs.Byte);
-            Assert.AreEqual("‭15 14957‬‬"‬, outputs.Integer16);
-            Assert.AreEqual("997997‬"‬, outputs.Integer32);
+            Assert.AreEqual("11110011101001101101", outputs.Binary);
+            CollectionAssert.AreEqual(new byte[] { 109, 58, 15 }, outputs.Byte);
+            CollectionAssert.AreEqual(new UInt16[] { 14957, 15 }, outputs.Integer16);
+            CollectionAssert.AreEqual(new UInt32[] { 997997 }, outputs.Integer32);
         }
 
         [TestMethod]
@@ -124,10 +124,22 @@ namespace DataRecognitionHelperUnitTests
             var input = "FE DCBA";
             var outputs = manager.GetOutputs(input);
 
-            Assert.AreEqual("1111 1110 1101 1100 1011 1010‬"‬, outputs.Binary);
-            Assert.AreEqual("254 220 186"‬, outputs.Byte);
-            Assert.AreEqual("‭254 56506‬"‬, outputs.Integer16);
-            Assert.AreEqual("16702650‬"‬, outputs.Integer32);
+            Assert.AreEqual("111111101101110010111010", outputs.Binary);
+            CollectionAssert.AreEqual(new byte[] { 186, 220, 254 }, outputs.Byte);
+            CollectionAssert.AreEqual(new UInt16[] { 56506, 254 }, outputs.Integer16);
+            CollectionAssert.AreEqual(new UInt32[] { 16702650 }, outputs.Integer32);
+        }
+
+        [TestMethod]
+        public void GetOutputsForHexadecimal2()
+        {
+            var input = "00FE DCBA";
+            var outputs = manager.GetOutputs(input);
+
+            Assert.AreEqual("111111101101110010111010", outputs.Binary);
+            CollectionAssert.AreEqual(new byte[] { 186, 220, 254, 0 }, outputs.Byte);
+            CollectionAssert.AreEqual(new UInt16[] { 56506, 254 }, outputs.Integer16);
+            CollectionAssert.AreEqual(new UInt32[] { 16702650 }, outputs.Integer32);
         }
 
         #endregion
