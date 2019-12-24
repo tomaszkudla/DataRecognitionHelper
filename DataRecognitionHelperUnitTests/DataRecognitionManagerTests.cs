@@ -37,13 +37,5 @@ namespace DataRecognitionHelperUnitTests
             var result = manager.GuessInputType(input);
             Assert.IsInstanceOfType(result, typeof(HexInput));
         }
-
-        [TestMethod]
-        public void GuessTextInput()
-        {
-            var input = "Hello world!";
-            var result = manager.GuessInputType(input);
-            Assert.IsInstanceOfType(result, typeof(TextInput));
-        }
     }
 }
