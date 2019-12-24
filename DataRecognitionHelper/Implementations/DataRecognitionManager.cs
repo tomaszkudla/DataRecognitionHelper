@@ -22,7 +22,6 @@ namespace DataRecognitionHelper.Implementations
 
         public IInput GuessInputType(string input)
         {
-            input = StringUtils.EscapeSpaces(input);
             return GetInputs().FirstOrDefault(i => i.IsApplicable(input));
         }
 

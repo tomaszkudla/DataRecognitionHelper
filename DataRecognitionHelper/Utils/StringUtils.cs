@@ -8,11 +8,21 @@ namespace DataRecognitionHelper.Utils
     {
         public static string EscapeSpaces(string input)
         {
+            if (input == null)
+            { 
+                return null; 
+            }
+
             return new string(input.Where(c => !char.IsWhiteSpace(c)).ToArray());
         }
 
         public static byte[] TrimByteArray(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
+
             return bytes.Reverse().SkipWhile(b => b == 0).Reverse().ToArray();
         }
 

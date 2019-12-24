@@ -1,5 +1,6 @@
 ﻿using DataRecognitionHelper.Implementations;
 using DataRecognitionHelper.Interfaces;
+using DataRecognitionHelper.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace DataRecognitionHelperUI
 
         private void UpdateOutputs()
         {
-            var text = intputText.Text;
+            var text = StringUtils.EscapeSpaces(intputText.Text);
             IInput input = inputs.FirstOrDefault(i => i.Name == inputItems.FirstOrDefault(ii => ii.IsChecked).Name);
 
             if (input == null)
