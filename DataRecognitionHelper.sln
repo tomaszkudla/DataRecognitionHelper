@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRecognitionHelper", "DataRecognitionHelper\DataRecognitionHelper.csproj", "{6926CF02-9247-4ADF-9A6E-3A1E7A7EFED3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataRecognitionHelper", "DataRecognitionHelper\DataRecognitionHelper.csproj", "{6926CF02-9247-4ADF-9A6E-3A1E7A7EFED3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRecognitionHelperUnitTests", "DataRecognitionHelperUnitTests\DataRecognitionHelperUnitTests.csproj", "{DAC1CC90-94B5-4468-807E-2549359E36AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRecognitionHelperUI", "DataRecognitionHelperUI\DataRecognitionHelperUI.csproj", "{A209FF05-253E-4D01-A615-4699B9E679DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DAC1CC90-94B5-4468-807E-2549359E36AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAC1CC90-94B5-4468-807E-2549359E36AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAC1CC90-94B5-4468-807E-2549359E36AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A209FF05-253E-4D01-A615-4699B9E679DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A209FF05-253E-4D01-A615-4699B9E679DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A209FF05-253E-4D01-A615-4699B9E679DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A209FF05-253E-4D01-A615-4699B9E679DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

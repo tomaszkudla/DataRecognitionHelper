@@ -7,6 +7,7 @@ namespace DataRecognitionHelper.Interfaces
 {
     public interface IDataRecognitionManager
     {
-        InputType GuessInputType(string input);
+        IInput GuessInputType(string input);
+        List<IOutput> GetOutputs();
     }
 }

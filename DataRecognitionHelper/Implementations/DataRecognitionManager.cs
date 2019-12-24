@@ -1,5 +1,7 @@
 ﻿using DataRecognitionHelper.Data;
+using DataRecognitionHelper.Inputs;
 using DataRecognitionHelper.Interfaces;
+using DataRecognitionHelper.Outputs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,25 +12,36 @@ namespace DataRecognitionHelper.Implementations
 {
     public class DataRecognitionManager : IDataRecognitionManager
     {
-        public InputType GuessInputType(string input)
+        public List<IOutput> GetOutputs()
+        {
+            return new List<IOutput>()
+            {
+                new BinaryOutput(),
+                new ByteOutput(),
+                new Integer16Output(),
+                new Integer32Output()
+            };
+        }
+
+        public IInput GuessInputType(string input)
         {
             input = EscapeSpaces(input);
 
             var binaries = new char[] { '0', '1' };
             if (input.All(c => binaries.Contains(c)))
             {
-                return InputType.Bin;
+                return new BinInput();
             }
             else if (input.All(char.IsDigit))
             {
-                return InputType.Dec;
+                return new DecInput();
             }
             else if (input.ToLower().All(c => char.IsDigit(c) || new char[] { 'a', 'b', 'c', 'd', 'e', 'f' }.Contains(c)))
             {
-                return InputType.Hex;
+                return new HexInput();
             }
 
-            return InputType.Text;
+            return new TextInput();
         }
 
         private string EscapeSpaces(string input)
