@@ -15,7 +15,13 @@ namespace DataRecognitionHelper.Inputs
                 return null;
             }
 
-            return Enumerable.Range(0, input.Length)
+            var length = input.Length;
+            if (length % 2 != 0)
+            {
+                input = "0" + input;
+            }
+
+            return Enumerable.Range(0, length)
                 .Where(x => x % 2 == 0)
                 .Select(x => Convert.ToByte(input.Substring(x, 2), 16))
                 .Reverse()

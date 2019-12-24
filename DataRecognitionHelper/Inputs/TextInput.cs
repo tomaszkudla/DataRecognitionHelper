@@ -17,7 +17,7 @@ namespace DataRecognitionHelper.Inputs
 
         public bool IsApplicable(string input)
         {
-            return true;
+            return false;
         }
     }
 }

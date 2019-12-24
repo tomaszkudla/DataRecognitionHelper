@@ -61,7 +61,7 @@ namespace DataRecognitionHelperUI
                 input = manager.GuessInputType(text);
             }
 
-            if (!input.IsApplicable(text))
+            if (input == null || !input.IsApplicable(text))
             {
                 outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "Not applicable" }).ToList();
                 return;
