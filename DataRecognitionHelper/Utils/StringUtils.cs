@@ -18,6 +18,11 @@ namespace DataRecognitionHelper.Utils
 
         public static string EnumerableToString<T>(IEnumerable<T> enumerable)
         {
+            if (enumerable == null)
+            {
+                return null;
+            }
+
             var sb = new StringBuilder();
             var count = enumerable.Count();
 

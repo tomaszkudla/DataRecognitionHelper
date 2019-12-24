@@ -1,9 +1,6 @@
 ﻿using DataRecognitionHelper.Interfaces;
-using DataRecognitionHelper.Utils;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace DataRecognitionHelper.Outputs
@@ -14,6 +11,11 @@ namespace DataRecognitionHelper.Outputs
 
         public string GetOutput(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
+
             var bits = new BitArray(bytes);
 
             var sb = new StringBuilder();

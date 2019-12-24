@@ -13,11 +13,24 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Enter some text" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="intput1" Margin="5" TextChanged="Input_TextChanged"/>
-        <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" Name="outputsItems">
+        <TextBox Grid.Row="0" Grid.Column="1" Name="intputText" Margin="5" TextChanged="Input_TextChanged"/>
+        <ItemsControl Grid.Row="0" Grid.Column="2" Name="inputItemsControl">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <RadioButton GroupName="inputs" Content="{Binding Name}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" Checked="RadioButton_Checked"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" Name="outputItemsControl">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">

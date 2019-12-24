@@ -23,22 +23,52 @@ namespace DataRecognitionHelperUI
     public partial class MainWindow : Window
     {
         DataRecognitionManager manager;
-        List<OutputItem> outputs;
+        List<InputItem> inputItems;
+        List<OutputItem> outputItems;
+        List<IInput> inputs;
+        List<IOutput> outputs;
 
         public MainWindow()
         {
             InitializeComponent();
             manager = new DataRecognitionManager();
-            outputs = manager.GetOutputs().Select(o => new OutputItem() { Name = o.Name, Value = string.Empty }).ToList();
-            outputsItems.ItemsSource = outputs;
+            inputs = manager.GetInputs();
+            inputItems = new List<InputItem>() { new InputItem { Name = "Auto", IsChecked = true} };
+            inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name}));
+            inputItemsControl.ItemsSource = inputItems;
+            outputs = manager.GetOutputs();
+            outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = string.Empty }).ToList();
+            outputItemsControl.ItemsSource = outputItems;
         }
 
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string text = (sender as TextBox)?.Text;
-            var inputType = manager.GuessInputType(text);
-            var bytes = inputType.GetBytes(text);
-            outputsItems.ItemsSource = manager.GetOutputs().Select(o => new OutputItem() { Name = o.Name, Value = o.GetOutput(bytes) }).ToList();
+            UpdateOutputs();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateOutputs();
+        }
+
+        private void UpdateOutputs()
+        {
+            var text = intputText.Text;
+            IInput input = inputs.FirstOrDefault(i => i.Name == inputItems.FirstOrDefault(ii => ii.IsChecked).Name);
+
+            if (input == null)
+            {
+                input = manager.GuessInputType(text);
+            }
+
+            if (!input.IsApplicable(text))
+            {
+                outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "Not applicable" }).ToList();
+                return;
+            }
+
+            var bytes = input.GetBytes(text);
+            outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = o.GetOutput(bytes) }).ToList();
         }
     }
 
@@ -46,5 +76,11 @@ namespace DataRecognitionHelperUI
     {
         public string Name { get; set; }
         public string Value { get; set; }
+    }
+
+    public class InputItem
+    {
+        public string Name { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

@@ -9,6 +9,11 @@ namespace DataRecognitionHelper.Outputs
 
         public string GetOutput(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
+
             throw new NotImplementedException();
         }
     }

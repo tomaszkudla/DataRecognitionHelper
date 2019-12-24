@@ -1,8 +1,7 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace DataRecognitionHelper.Inputs
 {
@@ -12,6 +11,11 @@ namespace DataRecognitionHelper.Inputs
 
         public byte[] GetBytes(string input)
         {
+            if (!IsApplicable(input))
+            {
+                return null;
+            }
+
             if (UInt64.TryParse(input, out var result64))
             {
                 var bytes = BitConverter.GetBytes(result64);
@@ -19,6 +23,11 @@ namespace DataRecognitionHelper.Inputs
             }
 
             return null;
+        }
+
+        public bool IsApplicable(string input)
+        {
+            return input.All(char.IsDigit);
         }
     }
 }

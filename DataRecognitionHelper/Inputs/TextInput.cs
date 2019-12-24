@@ -1,8 +1,6 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace DataRecognitionHelper.Inputs
@@ -15,6 +13,11 @@ namespace DataRecognitionHelper.Inputs
         {
             var bytes = Encoding.ASCII.GetBytes(input);
             return StringUtils.TrimByteArray(bytes);
+        }
+
+        public bool IsApplicable(string input)
+        {
+            return true;
         }
     }
 }

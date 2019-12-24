@@ -1,10 +1,7 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataRecognitionHelper.Inputs
 {
@@ -14,6 +11,11 @@ namespace DataRecognitionHelper.Inputs
 
         public byte[] GetBytes(string input)
         {
+            if (!IsApplicable(input))
+            {
+                return null;
+            }
+
             var bools = input.Select(c => c == '0' ? false : c == '1' ? true : false).Reverse().ToArray();
             var bitArray = new BitArray(bools);
             var bitArrayLength = bitArray.Length;
@@ -21,6 +23,12 @@ namespace DataRecognitionHelper.Inputs
             byte[] bytes = new byte[length];
             bitArray.CopyTo(bytes, 0);
             return StringUtils.TrimByteArray(bytes);
+        }
+
+        public bool IsApplicable(string input)
+        {
+            var binaries = new char[] { '0', '1' };
+            return input.All(c => binaries.Contains(c));
         }
     }
 }

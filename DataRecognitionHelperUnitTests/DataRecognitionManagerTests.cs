@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataRecognitionHelper.Data;
 using DataRecognitionHelper.Implementations;
+using DataRecognitionHelper.Inputs;
 
 namespace DataRecognitionHelperUnitTests
 {
@@ -14,39 +14,36 @@ namespace DataRecognitionHelperUnitTests
             manager = new DataRecognitionManager();
         }
 
-        #region GuessImputType tests
-
         [TestMethod]
         public void GuessBinaryInput()
         {
             var input = "1010 1000 1111 0101";
-            var actualResult = manager.GuessInputType(input);
-            Assert.AreEqual(InputType.Bin, actualResult);
+            var result = manager.GuessInputType(input);
+            Assert.IsInstanceOfType(result, typeof(BinInput));
         }
 
         [TestMethod]
         public void GuessDecimalInput()
         {
             var input = "1 234 567 890";
-            var actualResult = manager.GuessInputType(input);
-            Assert.AreEqual(InputType.Dec, actualResult);
+            var result = manager.GuessInputType(input);
+            Assert.IsInstanceOfType(result, typeof(DecInput));
         }
 
         [TestMethod]
         public void GuessHexadecimalInput()
         {
             var input = "FFFF FFFF";
-            var actualResult = manager.GuessInputType(input);
-            Assert.AreEqual(InputType.Hex, actualResult);
+            var result = manager.GuessInputType(input);
+            Assert.IsInstanceOfType(result, typeof(HexInput));
         }
 
         [TestMethod]
         public void GuessTextInput()
         {
             var input = "Hello world!";
-            var actualResult = manager.GuessInputType(input);
-            Assert.AreEqual(InputType.Text, actualResult);
+            var result = manager.GuessInputType(input);
+            Assert.IsInstanceOfType(result, typeof(TextInput));
         }
-        #endregion
     }
 }

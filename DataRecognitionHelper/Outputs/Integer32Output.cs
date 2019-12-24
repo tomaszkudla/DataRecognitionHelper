@@ -12,6 +12,11 @@ namespace DataRecognitionHelper.Outputs
 
         public string GetOutput(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
+
             var bytesCopy = new byte[bytes.Length];
             bytes.CopyTo(bytesCopy, 0);
             var result = new List<UInt32>();
