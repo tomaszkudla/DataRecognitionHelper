@@ -8,7 +8,5 @@ namespace DataRecognitionHelper.Interfaces
     public interface IDataRecognitionManager
     {
         InputType GuessInputType(string input);
-        byte[] ConvertToByteArray(string input, InputType inputType = InputType.Auto);
-        Outputs GetOutputs(string input, InputType inputType = InputType.Auto);
     }
 }
