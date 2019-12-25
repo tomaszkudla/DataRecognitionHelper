@@ -5,27 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataRecognitionHelperUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#1E1E1E">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="#E6E6E6" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="#E6E6E6" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </Window.Resources>
     <Grid x:Name="Grid1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Enter some text" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="intputText" Margin="5" TextChanged="Input_TextChanged"/>
-        <ItemsControl Grid.Row="0" Grid.Column="2" Name="inputItemsControl">
+        <TextBox Grid.Row="0" Grid.Column="0" Name="intputText" Margin="10" TextChanged="Input_TextChanged"/>
+        <ItemsControl Grid.Row="0" Grid.Column="1" Name="inputItemsControl" Margin="10">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton GroupName="inputs" Content="{Binding Name}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" Checked="RadioButton_Checked"/>
+                        <RadioButton GroupName="inputs" Content="{Binding Name}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" Checked="RadioButton_Checked" Foreground="#E6E6E6"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -33,13 +44,17 @@
         <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" Name="outputItemsControl">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,0,5">
+                    <Grid Margin="10,5,10,5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}" />
-                        <Label Grid.Column="1" Content="{Binding Value}" />
+                        <Border BorderBrush="#E6E6E6" BorderThickness="1,1,0,1" Grid.Column="0">
+                            <Label Content="{Binding Name}" HorizontalAlignment="Right" />
+                        </Border>
+                        <Border BorderBrush="#E6E6E6" BorderThickness="1" Grid.Column="1">
+                            <Label Grid.Column="1" Content="{Binding Value}" />
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
