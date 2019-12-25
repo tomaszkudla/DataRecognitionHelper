@@ -16,16 +16,6 @@ namespace DataRecognitionHelper.Utils
             return new string(input.Where(c => !char.IsWhiteSpace(c)).ToArray());
         }
 
-        public static byte[] TrimByteArray(byte[] bytes)
-        {
-            if (bytes == null)
-            {
-                return null;
-            }
-
-            return bytes.Reverse().SkipWhile(b => b == 0).Reverse().ToArray();
-        }
-
         public static string EnumerableToString<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)

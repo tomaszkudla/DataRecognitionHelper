@@ -22,7 +22,7 @@ namespace DataRecognitionHelper.Inputs
             var length = bitArrayLength % 4 == 0 ? bitArrayLength / 4 : bitArrayLength / 4 + 1;
             byte[] bytes = new byte[length];
             bitArray.CopyTo(bytes, 0);
-            return StringUtils.TrimByteArray(bytes);
+            return ByteArrayUtils.TrimByteArray(bytes);
         }
 
         public bool IsApplicable(string input)

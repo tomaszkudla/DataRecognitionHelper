@@ -11,10 +11,16 @@ namespace DataRecognitionHelper.Inputs
 
         public byte[] GetBytes(string input)
         {
-            if (UInt64.TryParse(input, out var result64))
+            if (Int64.TryParse(input, out var result64))
             {
                 var bytes = BitConverter.GetBytes(result64);
-                return StringUtils.TrimByteArray(bytes);
+
+                if (result64 < 0)
+                {
+                    return ByteArrayUtils.TrimByteArrayForNegative(bytes);
+                }
+
+                return ByteArrayUtils.TrimByteArray(bytes);
             }
 
             return null;
@@ -22,7 +28,7 @@ namespace DataRecognitionHelper.Inputs
 
         public bool IsApplicable(string input)
         {
-            return UInt64.TryParse(input, out _);
+            return Int64.TryParse(input, out _);
         }
     }
 }

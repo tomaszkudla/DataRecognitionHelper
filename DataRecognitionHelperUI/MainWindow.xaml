@@ -22,7 +22,7 @@
             <Setter Property="Foreground" Value="#E6E6E6"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=IsActive}" Value="True">
-                    <Setter Property="Foreground" Value="#00FF00"/>
+                    <Setter Property="Foreground" Value="#569DE5"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>

@@ -12,7 +12,7 @@ namespace DataRecognitionHelper.Inputs
         public byte[] GetBytes(string input)
         {
             var bytes = Encoding.ASCII.GetBytes(input);
-            return StringUtils.TrimByteArray(bytes);
+            return ByteArrayUtils.TrimByteArray(bytes);
         }
 
         public bool IsApplicable(string input)

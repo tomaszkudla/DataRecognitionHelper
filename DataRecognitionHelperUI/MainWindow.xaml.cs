@@ -36,7 +36,7 @@ namespace DataRecognitionHelperUI
             inputs = manager.GetInputs();
             inputItems = new List<InputItem>() { new InputItem { Name = "Auto", IsChecked = true } };
             inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name }));
-            inputItemsControl.ItemsSource = inputItems;
+            ClearInputs();
             outputs = manager.GetOutputs();
             outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
             outputItemsControl.ItemsSource = outputItems;
@@ -58,7 +58,8 @@ namespace DataRecognitionHelperUI
 
             if (string.IsNullOrEmpty(text))
             {
-                outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
+                SetOutputsMessage("0");
+                ClearInputs();
                 return;
             }
 
@@ -77,11 +78,17 @@ namespace DataRecognitionHelperUI
 
             if (input == null || !input.IsApplicable(text))
             {
-                outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "Not applicable" }).ToList();
+                SetOutputsMessage("Not applicable");
                 return;
             }
 
             var bytes = input.GetBytes(text);
+            if (!bytes.Any())
+            {
+                SetOutputsMessage("0");
+                return;
+            }
+
             outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = o.GetOutput(bytes) }).ToList();
         }
 
@@ -99,6 +106,17 @@ namespace DataRecognitionHelperUI
             }
 
             inputItemsControl.ItemsSource = new List<InputItem>(inputItems);
+        }
+
+        private void ClearInputs()
+        {
+            inputItems.ForEach(i => i.IsActive = false);
+            inputItemsControl.ItemsSource = new List<InputItem>(inputItems);
+        }
+
+        private void SetOutputsMessage(string message)
+        {
+            outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = message }).ToList();
         }
     }
 

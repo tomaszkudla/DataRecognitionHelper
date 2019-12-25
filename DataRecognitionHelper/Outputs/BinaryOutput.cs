@@ -26,7 +26,14 @@ namespace DataRecognitionHelper.Outputs
                 sb.Append(c);
             }
 
-            return sb.ToString().TrimStart(new Char[] { '0' });
+            var result = sb.ToString().TrimStart(new Char[] { '0' });
+
+            if (string.IsNullOrEmpty(result))
+            {
+                result = "0";
+            }
+
+            return result;
         }
     }
 }
