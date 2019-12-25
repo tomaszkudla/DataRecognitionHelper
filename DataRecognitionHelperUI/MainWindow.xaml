@@ -46,11 +46,11 @@
                 <DataTemplate>
                     <Grid Margin="10,5,10,5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="AUTO" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border BorderBrush="#E6E6E6" BorderThickness="1,1,0,1" Grid.Column="0">
-                            <Label Content="{Binding Name}" HorizontalAlignment="Right" />
+                            <Label Content="{Binding Name}" HorizontalAlignment="Right" Background="#111111"/>
                         </Border>
                         <Border BorderBrush="#E6E6E6" BorderThickness="1" Grid.Column="1">
                             <TextBox Grid.Column="1" Margin="5" Background="Transparent" FontSize="18" Height="24" BorderThickness="0" Text="{Binding Value, Mode=OneWay}" IsReadOnly="True" />

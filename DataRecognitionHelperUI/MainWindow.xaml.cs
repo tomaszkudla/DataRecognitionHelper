@@ -66,7 +66,7 @@ namespace DataRecognitionHelperUI
 
             if (input == null)
             {
-                input = manager.GuessInputType(text);
+                input = inputs.FirstOrDefault(i => i.IsApplicable(text));
             }
 
             if (input == null || !input.IsApplicable(text))
