@@ -18,6 +18,14 @@
             <Setter Property="Foreground" Value="#E6E6E6" />
             <Setter Property="Margin" Value="2" />
         </Style>
+        <Style TargetType="RadioButton" x:Key="ColorByActive">
+            <Setter Property="Foreground" Value="#E6E6E6"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsActive}" Value="True">
+                    <Setter Property="Foreground" Value="#00FF00"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid x:Name="Grid1">
         <Grid.RowDefinitions>
@@ -36,7 +44,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton GroupName="inputs" Content="{Binding Name}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" Checked="RadioButton_Checked" Foreground="#E6E6E6"/>
+                        <RadioButton GroupName="inputsButtons" Content="{Binding Name}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" Checked="RadioButton_Checked" Style="{StaticResource ColorByActive}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

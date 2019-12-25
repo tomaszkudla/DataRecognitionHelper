@@ -34,8 +34,8 @@ namespace DataRecognitionHelperUI
             InitializeComponent();
             manager = new DataRecognitionManager();
             inputs = manager.GetInputs();
-            inputItems = new List<InputItem>() { new InputItem { Name = "Auto", IsChecked = true} };
-            inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name}));
+            inputItems = new List<InputItem>() { new InputItem { Name = "Auto", IsChecked = true } };
+            inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name }));
             inputItemsControl.ItemsSource = inputItems;
             outputs = manager.GetOutputs();
             outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
@@ -44,15 +44,15 @@ namespace DataRecognitionHelperUI
 
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateOutputs();
+            Update();
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UpdateOutputs();
+            Update();
         }
 
-        private void UpdateOutputs()
+        private void Update()
         {
             var text = StringUtils.EscapeSpaces(intputText.Text);
 
@@ -67,6 +67,12 @@ namespace DataRecognitionHelperUI
             if (input == null)
             {
                 input = inputs.FirstOrDefault(i => i.IsApplicable(text));
+                var activeItem = inputItems.FirstOrDefault(i => i.Name == input.Name);
+                UpdateInputs(activeItem);
+            }
+            else
+            {
+                UpdateInputs();
             }
 
             if (input == null || !input.IsApplicable(text))
@@ -77,6 +83,22 @@ namespace DataRecognitionHelperUI
 
             var bytes = input.GetBytes(text);
             outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = o.GetOutput(bytes) }).ToList();
+        }
+
+        private void UpdateInputs(InputItem activeItem = null)
+        {
+            inputItems.ForEach(i => i.IsActive = false);
+            if (activeItem != null)
+            {
+                activeItem.IsActive = true;
+            }
+            else
+            {
+                activeItem = inputItems.FirstOrDefault(i => i.IsChecked == true);
+                activeItem.IsActive = true;
+            }
+
+            inputItemsControl.ItemsSource = new List<InputItem>(inputItems);
         }
     }
 
@@ -90,5 +112,6 @@ namespace DataRecognitionHelperUI
     {
         public string Name { get; set; }
         public bool IsChecked { get; set; }
+        public bool IsActive { get; set; }
     }
 }
