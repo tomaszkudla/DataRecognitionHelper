@@ -38,7 +38,7 @@ namespace DataRecognitionHelperUI
             inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name}));
             inputItemsControl.ItemsSource = inputItems;
             outputs = manager.GetOutputs();
-            outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = string.Empty }).ToList();
+            outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
             outputItemsControl.ItemsSource = outputItems;
         }
 
@@ -55,6 +55,13 @@ namespace DataRecognitionHelperUI
         private void UpdateOutputs()
         {
             var text = StringUtils.EscapeSpaces(intputText.Text);
+
+            if (string.IsNullOrEmpty(text))
+            {
+                outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
+                return;
+            }
+
             IInput input = inputs.FirstOrDefault(i => i.Name == inputItems.FirstOrDefault(ii => ii.IsChecked).Name);
 
             if (input == null)

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DataRecognitionHelper.Inputs
 {
-    public class TextInput : IInput
+    public class ASCIIInput : IInput
     {
-        public string Name => "Text";
+        public string Name => "ASCII";
 
         public byte[] GetBytes(string input)
         {
@@ -17,7 +17,7 @@ namespace DataRecognitionHelper.Inputs
 
         public bool IsApplicable(string input)
         {
-            return false;
+            return true;
         }
     }
 }

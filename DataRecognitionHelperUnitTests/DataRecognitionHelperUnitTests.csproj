@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InputsTests\ASCIIInputTests.cs" />
     <Compile Include="InputsTests\HexInputTests.cs" />
     <Compile Include="InputsTests\DecInputTests.cs" />
     <Compile Include="InputsTests\BinInputTests.cs" />

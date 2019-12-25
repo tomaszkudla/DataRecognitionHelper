@@ -11,11 +11,6 @@ namespace DataRecognitionHelper.Inputs
 
         public byte[] GetBytes(string input)
         {
-            if (!IsApplicable(input))
-            {
-                return null;
-            }
-
             if (UInt64.TryParse(input, out var result64))
             {
                 var bytes = BitConverter.GetBytes(result64);
@@ -27,7 +22,7 @@ namespace DataRecognitionHelper.Inputs
 
         public bool IsApplicable(string input)
         {
-            return input.All(char.IsDigit);
+            return UInt64.TryParse(input, out _);
         }
     }
 }

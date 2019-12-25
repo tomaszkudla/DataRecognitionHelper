@@ -16,7 +16,7 @@ namespace DataRecognitionHelper.Implementations
                 new BinInput(),
                 new DecInput(),
                 new HexInput(),
-                new TextInput()
+                new ASCIIInput()
             };
         }
 
