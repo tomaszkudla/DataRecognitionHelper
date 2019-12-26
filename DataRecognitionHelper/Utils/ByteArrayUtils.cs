@@ -60,13 +60,13 @@ namespace DataRecognitionHelper.Utils
 
         public static byte[] ReverseBytes10(byte[] bytes)
         {
-            var bytesOld = new List<byte>(NormalizeTo2Bytes(bytes));
+            var bytesNormalized = NormalizeTo2Bytes(bytes);
             var bytesNew = new List<byte>();
 
-            for (int i = 1; i < bytesOld.Count; i += 2)
+            for (int i = 1; i < bytesNormalized.Length; i += 2)
             {
-                bytesNew.Add(bytesOld[i]);
-                bytesNew.Add(bytesOld[i - 1]);
+                bytesNew.Add(bytesNormalized[i]);
+                bytesNew.Add(bytesNormalized[i - 1]);
             }
 
             return bytesNew.ToArray();
@@ -74,19 +74,15 @@ namespace DataRecognitionHelper.Utils
 
         public static byte[] ReverseBytes3210(byte[] bytes)
         {
-            var bytesOld = new List<byte>(bytes);
-
-            if (bytesOld.Count % 4 != 0)
-            {
-                bytesOld.Insert(0, (byte)0);
-            }
-
+            var bytesNormalized = NormalizeTo4Bytes(bytes); 
             var bytesNew = new List<byte>();
 
-            for (int i = 1; i < bytesOld.Count; i += 2)
+            for (int i = 3; i < bytesNormalized.Length; i += 4)
             {
-                bytesNew.Add(bytesOld[i]);
-                bytesNew.Add(bytesOld[i - 1]);
+                bytesNew.Add(bytesNormalized[i]);
+                bytesNew.Add(bytesNormalized[i - 1]);
+                bytesNew.Add(bytesNormalized[i - 2]);
+                bytesNew.Add(bytesNormalized[i - 3]);
             }
 
             return bytesNew.ToArray();

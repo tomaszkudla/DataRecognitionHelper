@@ -1,8 +1,5 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataRecognitionHelper.Outputs
 {

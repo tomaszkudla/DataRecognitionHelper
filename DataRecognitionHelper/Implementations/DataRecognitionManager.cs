@@ -35,6 +35,7 @@ namespace DataRecognitionHelper.Implementations
                 new UInteger16RevOutput(),
                 new Integer16Output(),
                 new Integer16RevOutput(),
+                new Integer32Output(),
                 new UInteger32Output()
             };
         }
