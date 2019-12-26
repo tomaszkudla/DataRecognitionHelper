@@ -54,8 +54,8 @@
     <Compile Include="InputsTests\DecInputTests.cs" />
     <Compile Include="InputsTests\BinInputTests.cs" />
     <Compile Include="DataRecognitionManagerTests.cs" />
-    <Compile Include="OutputsTests\Integer32OutputTests.cs" />
-    <Compile Include="OutputsTests\Integer16OutputTests.cs" />
+    <Compile Include="OutputsTests\UInteger32OutputTests.cs" />
+    <Compile Include="OutputsTests\UInteger16OutputTests.cs" />
     <Compile Include="OutputsTests\ByteOutputTests.cs" />
     <Compile Include="OutputsTests\BinaryOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

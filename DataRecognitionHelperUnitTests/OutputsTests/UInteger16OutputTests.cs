@@ -7,58 +7,55 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DataRecognitionHelperUnitTests.OutputsTests
 {
     [TestClass]
-    public class Integer32OutputTests
+    public class UInteger16OutputTests
     {
-        IOutput output = new Integer32Output();
+        IOutput output = new UInteger16Output();
         IInput binInput = new BinInput();
         IInput decInput = new DecInput();
         IInput hexInput = new HexInput();
 
         [TestMethod]
-        public void ConvertBinaryToInteger32()
+        public void ConvertBinaryToUInteger16()
         {
             var data = "1111 0010 1010 1011 1010 1110 0100 0011";
             data = StringUtils.EscapeSpaces(data);
             var bytes = binInput.GetBytes(data);
             var result = output.GetOutput(bytes);
 
-            Assert.AreEqual("4071337539", result);
-
-
+            Assert.AreEqual("44611 62123", result);
         }
 
         [TestMethod]
-        public void ConvertDecToInteger32()
+        public void ConvertDecToUInteger16()
         {
             var data = "997 997";
             data = StringUtils.EscapeSpaces(data);
             var bytes = decInput.GetBytes(data);
             var result = output.GetOutput(bytes);
 
-            Assert.AreEqual("997997", result);
-
+            Assert.AreEqual("14957 15", result);
         }
 
         [TestMethod]
-        public void ConvertHexToInteger32()
+        public void ConvertHexToUInteger16()
         {
             var data = "FE DCBA";
             data = StringUtils.EscapeSpaces(data);
             var bytes = hexInput.GetBytes(data);
             var result = output.GetOutput(bytes);
 
-            Assert.AreEqual("16702650", result);
+            Assert.AreEqual("56506 254", result);
         }
 
         [TestMethod]
-        public void ConvertHexToInteger32_2()
+        public void ConvertHexToUInteger16_2()
         {
             var data = "00FE DCBA";
             data = StringUtils.EscapeSpaces(data);
             var bytes = hexInput.GetBytes(data);
             var result = output.GetOutput(bytes);
 
-            Assert.AreEqual("16702650", result);
+            Assert.AreEqual("56506 254", result);
         }
     }
 }

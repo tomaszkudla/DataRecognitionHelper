@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -27,6 +28,68 @@ namespace DataRecognitionHelper.Utils
             var remainingBytes = bytes.Skip(1).Reverse().SkipWhile(b => b == 255).Reverse().ToList();
             remainingBytes.Insert(0, firstbyte);
             return remainingBytes.ToArray();
+        }
+
+        public static byte[] NormalizeTo2Bytes(byte[] bytes)
+        {
+            if (bytes.Length % 2 != 0)
+            {
+                return bytes.Concat(new byte[] { (byte)0 }).ToArray();
+            }
+
+            return bytes;
+        }
+
+        public static byte[] NormalizeTo4Bytes(byte[] bytes)
+        {
+            var remainder = bytes.Length % 4;
+
+            if (remainder > 0)
+            {
+                var missingbytes = new byte[0];
+                for (int i = 0; i < 4 - remainder; i++)
+                {
+                    missingbytes = missingbytes.Concat(new byte[] { (byte)0 }).ToArray();
+                }
+
+                return bytes.Concat(missingbytes).ToArray();
+            }
+
+            return bytes;
+        }
+
+        public static byte[] ReverseBytes10(byte[] bytes)
+        {
+            var bytesOld = new List<byte>(NormalizeTo2Bytes(bytes));
+            var bytesNew = new List<byte>();
+
+            for (int i = 1; i < bytesOld.Count; i += 2)
+            {
+                bytesNew.Add(bytesOld[i]);
+                bytesNew.Add(bytesOld[i - 1]);
+            }
+
+            return bytesNew.ToArray();
+        }
+
+        public static byte[] ReverseBytes3210(byte[] bytes)
+        {
+            var bytesOld = new List<byte>(bytes);
+
+            if (bytesOld.Count % 4 != 0)
+            {
+                bytesOld.Insert(0, (byte)0);
+            }
+
+            var bytesNew = new List<byte>();
+
+            for (int i = 1; i < bytesOld.Count; i += 2)
+            {
+                bytesNew.Add(bytesOld[i]);
+                bytesNew.Add(bytesOld[i - 1]);
+            }
+
+            return bytesNew.ToArray();
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace DataRecognitionHelper.Outputs
 {
-    public class Integer16Output : IOutput
+    public class UInteger16Output : IOutput
     {
-        public string Name => "Integer16";
+        public string Name => "UInteger16";
 
         public string GetOutput(byte[] bytes)
         {
@@ -18,11 +18,11 @@ namespace DataRecognitionHelper.Outputs
             }
 
             var bytesNormalized = ByteArrayUtils.NormalizeTo2Bytes(bytes);
-            var result = new List<Int16>();
+            var result = new List<UInt16>();
 
             for (int i = 0; i < bytesNormalized.Length; i += 2)
             {
-                var num = BitConverter.ToInt16(bytesNormalized, i);
+                var num = BitConverter.ToUInt16(bytesNormalized, i);
                 result.Add(num);
             }
 
