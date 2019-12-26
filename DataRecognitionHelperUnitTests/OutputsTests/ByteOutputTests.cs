@@ -23,7 +23,6 @@ namespace DataRecognitionHelperUnitTests.OutputsTests
             var result = output.GetOutput(bytes);
 
             Assert.AreEqual("67 174 171 242", result);
-
         }
 
         [TestMethod]

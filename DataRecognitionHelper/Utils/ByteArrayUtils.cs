@@ -171,5 +171,18 @@ namespace DataRecognitionHelper.Utils
 
             return StringUtils.EnumerableToString(result);
         }
+
+        public static string ByteArrayAsFloat(byte[] bytes)
+        {
+            var result = new List<float>();
+            
+            for (int i = 0; i < bytes.Length; i += 4)
+            {
+                var num = BitConverter.ToSingle(bytes, i);
+                result.Add(num);
+            }
+
+            return StringUtils.EnumerableToString(result);
+        }
     }
 }

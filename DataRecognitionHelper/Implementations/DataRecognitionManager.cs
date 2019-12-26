@@ -44,6 +44,8 @@ namespace DataRecognitionHelper.Implementations
                 new Integer32Rev3210Output(),
                 new Integer32Rev2301Output(),
                 new Integer32Rev1032Output(),
+                new FloatOutput(),
+                new ASCIIOutput(),
             };
         }
     }

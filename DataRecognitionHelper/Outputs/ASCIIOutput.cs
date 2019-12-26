@@ -1,11 +1,12 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
+using System.Text;
 
 namespace DataRecognitionHelper.Outputs
 {
-    public class FloatOutput : IOutput
+    public class ASCIIOutput : IOutput
     {
-        public string Name => "Float";
+        public string Name => "ASCII";
 
         public string GetOutput(byte[] bytes)
         {
@@ -14,8 +15,7 @@ namespace DataRecognitionHelper.Outputs
                 return null;
             }
 
-            var bytesNormalized = ByteArrayUtils.NormalizeTo4Bytes(bytes);
-            return ByteArrayUtils.ByteArrayAsFloat(bytesNormalized);
+            return Encoding.ASCII.GetString(bytes);
         }
     }
 }

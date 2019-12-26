@@ -23,8 +23,6 @@ namespace DataRecognitionHelperUnitTests.OutputsTests
             var result = output.GetOutput(bytes);
 
             Assert.AreEqual("4071337539", result);
-
-
         }
 
         [TestMethod]
@@ -36,7 +34,6 @@ namespace DataRecognitionHelperUnitTests.OutputsTests
             var result = output.GetOutput(bytes);
 
             Assert.AreEqual("997997", result);
-
         }
 
         [TestMethod]
