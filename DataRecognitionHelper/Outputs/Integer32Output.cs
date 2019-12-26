@@ -1,7 +1,5 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
-using System;
-using System.Collections.Generic;
 
 namespace DataRecognitionHelper.Outputs
 {
@@ -17,15 +15,7 @@ namespace DataRecognitionHelper.Outputs
             }
 
             var bytesNormalized = ByteArrayUtils.NormalizeTo4Bytes(bytes);
-            var result = new List<Int32>();
-
-            for (int i = 0; i < bytesNormalized.Length; i += 4)
-            {
-                var num = BitConverter.ToInt32(bytesNormalized, i);
-                result.Add(num);
-            }
-
-            return StringUtils.EnumerableToString(result);
+            return ByteArrayUtils.ByteArrayAsInt32(bytesNormalized);
         }
     }
 }

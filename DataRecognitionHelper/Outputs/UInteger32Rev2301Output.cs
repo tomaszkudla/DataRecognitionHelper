@@ -3,9 +3,9 @@ using DataRecognitionHelper.Utils;
 
 namespace DataRecognitionHelper.Outputs
 {
-    public class UInteger16Output : IOutput
+    public class UInteger32Rev2301Output : IOutput
     {
-        public string Name => "UInteger16";
+        public string Name => "UInteger32 Rev 2301";
 
         public string GetOutput(byte[] bytes)
         {
@@ -14,8 +14,8 @@ namespace DataRecognitionHelper.Outputs
                 return null;
             }
 
-            var bytesNormalized = ByteArrayUtils.NormalizeTo2Bytes(bytes);
-            return ByteArrayUtils.ByteArrayAsUInt16(bytesNormalized);
+            var bytesReversed = ByteArrayUtils.ReverseBytes2301(bytes);
+            return ByteArrayUtils.ByteArrayAsUInt32(bytesReversed);
         }
     }
 }

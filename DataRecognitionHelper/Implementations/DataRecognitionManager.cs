@@ -38,8 +38,12 @@ namespace DataRecognitionHelper.Implementations
                 new Integer32Output(),
                 new UInteger32Output(),
                 new UInteger32Rev3210Output(),
+                new UInteger32Rev2301Output(),
+                new UInteger32Rev1032Output(),
                 new Integer32Output(),
                 new Integer32Rev3210Output(),
+                new Integer32Rev2301Output(),
+                new Integer32Rev1032Output(),
             };
         }
     }

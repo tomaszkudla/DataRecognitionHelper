@@ -1,7 +1,5 @@
 ﻿using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
-using System;
-using System.Collections.Generic;
 
 namespace DataRecognitionHelper.Outputs
 {
@@ -17,15 +15,7 @@ namespace DataRecognitionHelper.Outputs
             }
 
             var bytesReversed = ByteArrayUtils.ReverseBytes10(bytes);
-            var result = new List<UInt16>();
-
-            for (int i = 0; i < bytesReversed.Length; i += 2)
-            {
-                var num = BitConverter.ToUInt16(bytesReversed, i);
-                result.Add(num);
-            }
-
-            return StringUtils.EnumerableToString(result);
+            return ByteArrayUtils.ByteArrayAsUInt16(bytesReversed);
         }
     }
 }
