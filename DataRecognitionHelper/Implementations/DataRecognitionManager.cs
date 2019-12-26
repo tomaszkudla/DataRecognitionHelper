@@ -16,7 +16,7 @@ namespace DataRecognitionHelper.Implementations
                 new BinInput(),
                 new DecInput(),
                 new HexInput(),
-                new ASCIIInput()
+                new ASCIIInput(),
             };
         }
 
@@ -36,7 +36,10 @@ namespace DataRecognitionHelper.Implementations
                 new Integer16Output(),
                 new Integer16RevOutput(),
                 new Integer32Output(),
-                new UInteger32Output()
+                new UInteger32Output(),
+                new UInteger32Rev3210Output(),
+                new Integer32Output(),
+                new Integer32Rev3210Output(),
             };
         }
     }
