@@ -1,4 +1,5 @@
 ﻿using DataRecognitionHelper.Implementations;
+using DataRecognitionHelper.Inputs;
 using DataRecognitionHelper.Interfaces;
 using DataRecognitionHelper.Utils;
 using System;
@@ -38,7 +39,7 @@ namespace DataRecognitionHelperUI
             inputItems.AddRange(inputs.Select(i => new InputItem() { Name = i.Name }));
             ClearInputs();
             outputs = manager.GetOutputs();
-            outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = "0" }).ToList();
+            SetOutputsMessage("0");
             outputItemsControl.ItemsSource = outputItems;
         }
 
@@ -82,7 +83,16 @@ namespace DataRecognitionHelperUI
                 return;
             }
 
-            var bytes = input.GetBytes(text);
+            byte[] bytes;
+            if (input.GetType() == typeof(ASCIIInput))
+            {
+                bytes = input.GetBytes(intputText.Text);
+            }
+            else
+            {
+                bytes = input.GetBytes(text);
+            }
+
             if (!bytes.Any())
             {
                 SetOutputsMessage("0");
@@ -116,7 +126,10 @@ namespace DataRecognitionHelperUI
 
         private void SetOutputsMessage(string message)
         {
-            outputItemsControl.ItemsSource = outputs.Select(o => new OutputItem() { Name = o.Name, Value = message }).ToList();
+            outputItems = outputs.Select(o => new OutputItem() { Name = o.Name, Value = message }).ToList();
+            var asciiItem = outputItems.First(i => i.Name == "ASCII");
+            asciiItem.Value = string.Empty;
+            outputItemsControl.ItemsSource = outputItems;
         }
     }
 
